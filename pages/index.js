@@ -4,7 +4,7 @@ import Layout from '../components/Layout'
 
 export default function Home(){
 	return <Layout>
-		<h1>hola Mundo!!</h1>
+		<h1>hola Mundo!! cambios del 20230320!!!</h1>
 	</Layout>
 }
 
