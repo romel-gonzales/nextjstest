@@ -15,6 +15,13 @@ const useStyles = makeStyles({
     }, 
     main: {
         minHeight: '80vh'
+    },
+    grow: {
+        flexGrow: 1
+    },
+    brand: {
+        fontWeight: 'bold',
+        fontSize: '1.5rem'
     }
 })
 
