@@ -22,6 +22,10 @@ const useStyles = makeStyles({
     brand: {
         fontWeight: 'bold',
         fontSize: '1.5rem'
+    },
+    section: {
+        marginTop: 10,
+        marginBottom: 10
     }
 })
 
