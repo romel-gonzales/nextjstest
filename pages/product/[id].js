@@ -1,14 +1,23 @@
+import {useContext} from 'react'
 import { useRouter } from 'next/router'
 import Layout from '../../components/Layout'
 import NextLink from 'next/link'
 import { Link, Typography, Grid, CardMedia, List, ListItem, Card, Button } from '@material-ui/core'
 import useStyles from '../../utils/styles'
+import {Store} from '../../utils/Store'
 
 export default function ProductScreen ({ products }) {
   const router = useRouter()
   const { id } = router.query
   const classes = useStyles()
   const product = products.find(x => x.id === Number(id))
+  const {state, dispatch} = useContext(Store)
+
+  const addToCartHandler = () => {
+    dispatch({type: 'CART_ADD_ITEM', payload: product})
+    router.push('/cart')
+  }
+ 
   return (
     <Layout>
       <div className={classes.section}>
@@ -56,7 +65,9 @@ export default function ProductScreen ({ products }) {
                             </Grid>
                         </ListItem>
                         <ListItem>
-                            <Button fullWidth variant="contained" color="primary">
+                            <Button fullWidth variant="contained" color="primary"
+                              onClick={()=>addToCartHandler(product)}
+                            >
                                 Add to Cart
                             </Button>
                         </ListItem>
@@ -72,7 +83,7 @@ export default function ProductScreen ({ products }) {
 export async function getServerSideProps (ctx) {
   const { params } = ctx
   const { id } = params
-  console.log(`getServerSideProps: ${id}`)
+  //console.log(`getServerSideProps: ${id}`)
   const response = await fetch('http://localhost:3000/api/products')
   const data = await response.json()
   return {
